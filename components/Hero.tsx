@@ -1,4 +1,3 @@
-
 import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Play, Send, Instagram, Cpu } from 'lucide-react';
@@ -19,9 +18,9 @@ const Hero: React.FC = () => {
 
   return (
     <section id="home" className="relative pt-32 pb-20 overflow-hidden">
-      {/* Background Blobs */}
-      <div className="blob bg-brand-red w-96 h-96 rounded-full top-0 -left-20 mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-      <div className="blob bg-brand-gold w-96 h-96 rounded-full bottom-0 -right-20 mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+      {/* Background Blobs - Using standard Tailwind classes for positioning, animation CSS is in global styles */}
+      <div className="absolute bg-brand-red w-96 h-96 rounded-full top-0 -left-20 mix-blend-multiply filter blur-3xl opacity-20 animate-blob z-0"></div>
+      <div className="absolute bg-brand-gold w-96 h-96 rounded-full bottom-0 -right-20 mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000 z-0"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12">
@@ -36,7 +35,7 @@ const Hero: React.FC = () => {
             <div className="inline-block px-4 py-1 mb-6 rounded-full bg-brand-red/10 border border-brand-red/20 text-brand-red font-bold text-sm">
               ✨ نسل جدید اتوماسیون ایران | Puan.ir
             </div>
-            <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6">
+            <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6 text-slate-900 dark:text-white">
               هوش مصنوعی <span className="text-brand-red">پوان</span> برای
               <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-l from-brand-gold to-brand-red">
@@ -44,15 +43,15 @@ const Hero: React.FC = () => {
               </span>
             </h1>
             <p className="text-lg text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              با پوان (Puan)، وب‌سایت وردپرسی خود را به یک ارتش هوشمند تبدیل کنید. اتصال خودکار به تلگرام، اینستاگرام و ساخت ایجنت‌های فروش بدون کدنویسی.
+              با پوان (Puan)، وب‌سایت وردپرسی خود را به یک ارتش هوشمند تبدیل کنید. اتصال خودکار به تلگرام، اینستاگرام و ساخت ایجنت‌های فروش بدون کدنویسی با یک کلیک.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button onClick={handleStart} className="group flex items-center justify-center gap-2 bg-brand-red text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-red-600 transition-all shadow-xl hover:shadow-red-500/30">
+              <button onClick={handleStart} className="group flex items-center justify-center gap-2 bg-brand-red text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-red-600 transition-all shadow-xl hover:shadow-red-500/30 transform active:scale-95">
                 شروع رایگان
                 <ArrowLeft className="group-hover:-translate-x-1 transition-transform" />
               </button>
-              <button onClick={handleDemo} className="flex items-center justify-center gap-2 bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-300 dark:hover:bg-slate-700 transition-all">
+              <button onClick={handleDemo} className="flex items-center justify-center gap-2 bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-300 dark:hover:bg-slate-700 transition-all transform active:scale-95">
                 <Play className="w-5 h-5 fill-current" />
                 مشاهده دمو پنل
               </button>
@@ -72,7 +71,7 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:w-1/2 relative"
+            className="lg:w-1/2 relative w-full"
           >
             <div className="relative w-full max-w-lg mx-auto bg-gradient-to-br from-slate-800 to-black rounded-2xl p-4 shadow-2xl border border-slate-700">
               {/* Fake UI Header */}
@@ -140,7 +139,7 @@ const Hero: React.FC = () => {
 
             {/* Floating Badges */}
             <motion.div 
-              className="absolute -top-10 -right-10 bg-white dark:bg-slate-800 p-4 rounded-xl shadow-xl flex items-center gap-3 animate-bounce"
+              className="absolute -top-10 -right-10 bg-white dark:bg-slate-800 p-4 rounded-xl shadow-xl flex items-center gap-3 animate-bounce hidden md:flex border border-slate-100 dark:border-slate-700"
               style={{ animationDuration: '3s' }}
             >
               <div className="text-green-500 font-bold text-xl">+450%</div>

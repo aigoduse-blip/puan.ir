@@ -1,8 +1,7 @@
-
 import React, { useContext } from 'react';
 import { SERVICES } from '../constants';
 import { NavigationContext } from '../NavigationContext';
-import { ArrowRight, CheckCircle, Zap, Briefcase } from 'lucide-react';
+import { ArrowRight, CheckCircle, Zap, Briefcase, AlertCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SEO from './SEO';
 
@@ -15,7 +14,22 @@ const ServiceDetail: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (!service) return <div>سرویس یافت نشد</div>;
+  if (!service) {
+    return (
+      <div className="pt-40 pb-20 text-center container mx-auto px-4">
+        <div className="flex flex-col items-center justify-center p-12 bg-slate-50 dark:bg-slate-800 rounded-3xl">
+          <AlertCircle className="w-16 h-16 text-slate-400 mb-4" />
+          <h2 className="text-2xl font-bold mb-4">سرویس مورد نظر یافت نشد</h2>
+          <button 
+            onClick={() => setPage('services')}
+            className="text-brand-red hover:underline font-bold"
+          >
+            بازگشت به لیست خدمات
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -27,9 +41,9 @@ const ServiceDetail: React.FC = () => {
         <div className="container mx-auto px-4">
           <button 
             onClick={() => setPage('services')}
-            className="flex items-center gap-2 text-slate-500 hover:text-brand-red mb-8 transition-colors"
+            className="flex items-center gap-2 text-slate-500 hover:text-brand-red mb-8 transition-colors group"
           >
-            <ArrowRight className="w-4 h-4" /> بازگشت به خدمات
+            <ArrowRight className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> بازگشت به خدمات
           </button>
 
           <div className="flex flex-col lg:flex-row gap-12 mb-20">
@@ -38,19 +52,19 @@ const ServiceDetail: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               className="lg:w-1/2"
             >
-              <div className="inline-block p-4 rounded-2xl bg-brand-red/10 mb-6">
+              <div className="inline-block p-4 rounded-2xl bg-brand-red/10 mb-6 shadow-inner">
                 {React.isValidElement(service.icon) 
                   ? React.cloneElement(service.icon as React.ReactElement<any>, { className: "w-16 h-16 text-brand-red" })
                   : service.icon
                 }
               </div>
-              <h1 className="text-4xl md:text-6xl font-black mb-6">{service.title}</h1>
-              <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
+              <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">{service.title}</h1>
+              <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed mb-8 text-justify">
                 {service.longDescription}
               </p>
               <button 
                 onClick={handleOrder}
-                className="bg-brand-red text-white px-8 py-4 rounded-xl font-bold hover:bg-red-600 transition-colors shadow-lg hover:shadow-red-500/40"
+                className="bg-brand-red text-white px-8 py-4 rounded-xl font-bold hover:bg-red-600 transition-all shadow-lg hover:shadow-red-500/40 transform hover:-translate-y-1"
               >
                 {service.cta} (ثبت سفارش)
               </button>
@@ -71,7 +85,7 @@ const ServiceDetail: React.FC = () => {
                     </h3>
                     <div className="flex flex-wrap gap-3 relative z-10">
                       {service.useCases.map((useCase, idx) => (
-                        <span key={idx} className="bg-white dark:bg-slate-900 px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm border border-slate-100 dark:border-slate-700 text-slate-700 dark:text-slate-200">
+                        <span key={idx} className="bg-white dark:bg-slate-900 px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm border border-slate-100 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-brand-red/30 transition-colors cursor-default">
                           {useCase}
                         </span>
                       ))}
@@ -86,7 +100,7 @@ const ServiceDetail: React.FC = () => {
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {service.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-3 bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm">
+                      <div key={idx} className="flex items-center gap-3 bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                         <CheckCircle className="text-green-500 w-5 h-5 shrink-0" />
                         <span className="font-medium text-sm">{feature}</span>
                       </div>
@@ -125,12 +139,12 @@ const ServiceDetail: React.FC = () => {
                    <div className="absolute top-8 left-0 hidden md:block w-full h-0.5 bg-slate-700 -z-10"></div>
                   <div className="text-4xl font-black text-brand-red mb-4">۲</div>
                   <h4 className="text-xl font-bold mb-2">توسعه و شخصی‌سازی</h4>
-                  <p className="text-slate-400">تنظیم ایجنت‌ها و مدل‌ها بر اساس داده‌های شما.</p>
+                  <p className="text-slate-400">تنظیم ایجنت‌ها و مدل‌ها بر اساس داده‌های اختصاصی شما.</p>
                 </div>
                 <div className="p-4 relative">
                   <div className="text-4xl font-black text-brand-red mb-4">۳</div>
                   <h4 className="text-xl font-bold mb-2">استقرار و پشتیبانی</h4>
-                  <p className="text-slate-400">راه‌اندازی نهایی و آموزش پرسنل شما.</p>
+                  <p className="text-slate-400">راه‌اندازی نهایی، تست و آموزش کامل پرسنل شما.</p>
                 </div>
               </div>
             </div>
